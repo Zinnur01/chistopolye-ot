@@ -178,7 +178,8 @@
         '<section><div class="section-head"><h2>Инструкции по участкам</h2><a href="#/instructions">Все</a></div><div class="tiles">' + cats + '</div></section>' +
         (schemes ? '<section><div class="section-head"><h2>Схемы эвакуации</h2><a href="#/schemes">Все</a></div><div class="list">' + schemes + '</div></section>' : '') +
         (contacts ? '<section><div class="section-head"><h2>Кому звонить</h2><a href="#/contacts">Все</a></div><div class="list">' + contacts + '</div></section>' : '') +
-        '<div class="footer">' + esc(C.org.name) + (C.updatedAt ? '<br>Обновлено ' + new Date(C.updatedAt).toLocaleDateString('ru-RU') : '') + '</div>' +
+        '<div class="footer">' + esc(C.org.name) + (C.updatedAt ? '<br>Обновлено ' + new Date(C.updatedAt).toLocaleDateString('ru-RU') : '') +
+          '<br><a href="admin/" style="text-decoration:underline;opacity:.8">Вход для ответственного</a></div>' +
       '</div>';
   };
 
