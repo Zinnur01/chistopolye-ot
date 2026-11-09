@@ -556,6 +556,9 @@ main { outline: none; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .footer { padding: 8px 16px 0; text-align: center; font-size: 12px; color: var(--muted); }
+.footer .credit { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 12.5px; }
+.footer .credit a { color: var(--accent); font-weight: 700; }
+.footer .admin-link { display: inline-block; margin-top: 8px; padding: 6px 10px; text-decoration: underline; opacity: .75; }
 
 .offline-pill {
   position: fixed; z-index: 40; left: 50%; transform: translateX(-50%);

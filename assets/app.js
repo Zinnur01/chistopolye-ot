@@ -179,7 +179,8 @@
         (schemes ? '<section><div class="section-head"><h2>Схемы эвакуации</h2><a href="#/schemes">Все</a></div><div class="list">' + schemes + '</div></section>' : '') +
         (contacts ? '<section><div class="section-head"><h2>Кому звонить</h2><a href="#/contacts">Все</a></div><div class="list">' + contacts + '</div></section>' : '') +
         '<div class="footer">' + esc(C.org.name) + (C.updatedAt ? '<br>Обновлено ' + new Date(C.updatedAt).toLocaleDateString('ru-RU') : '') +
-          '<br><a href="admin/" style="text-decoration:underline;opacity:.8">Вход для ответственного</a></div>' +
+          '<div class="credit">Разработка: <a href="https://zinnur01.github.io/" target="_blank" rel="noopener">Давлеев Зиннур</a></div>' +
+          '<a class="admin-link" href="admin/">Вход для ответственного</a></div>' +
       '</div>';
   };
 
