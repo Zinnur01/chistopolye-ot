@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="Arial, sans-serif">
+  <!-- Демонстрационный план эвакуации -->
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#1c8a3c"/>
+    </marker>
+  </defs>
+  <rect width="900" height="620" fill="#fff"/>
+  <text x="450" y="40" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2420">ПЛАН ЭВАКУАЦИИ · Ремонтная мастерская</text>
+  <!-- стены -->
+  <g fill="#f4f1e8" stroke="#1b2420" stroke-width="6">
+    <rect x="60" y="70" width="780" height="440"/>
+  </g>
+  <g stroke="#1b2420" stroke-width="4" fill="none">
+    <path d="M60 300 H330"/>
+    <path d="M330 70 V200"/><path d="M330 250 V510"/>
+    <path d="M600 70 V230"/><path d="M600 280 V510"/>
+    <path d="M600 330 H840"/>
+  </g>
+  <!-- проёмы выходов -->
+  <rect x="380" y="504" width="120" height="12" fill="#1c8a3c"/>
+  <rect x="834" y="160" width="12" height="90" fill="#1c8a3c"/>
+  <!-- подписи помещений -->
+  <g font-size="22" fill="#5b665f" text-anchor="middle" font-weight="700">
+    <text x="195" y="180">Склад запчастей</text>
+    <text x="195" y="410">Бытовка</text>
+    <text x="465" y="300">Ремонтный цех</text>
+    <text x="720" y="250">Сварочный пост</text>
+    <text x="720" y="430">Мойка</text>
+  </g>
+  <!-- пути эвакуации -->
+  <g stroke="#1c8a3c" stroke-width="7" fill="none" stroke-linecap="round" stroke-dasharray="2 14" marker-end="url(#ar)">
+    <path d="M195 220 C260 230 330 225 420 400 L440 490"/>
+    <path d="M195 360 C260 360 330 420 410 490"/>
+    <path d="M700 290 C740 260 780 220 820 205"/>
+    <path d="M720 470 C700 400 640 300 540 360 L470 490"/>
+  </g>
+  <!-- выходы -->
+  <g font-size="18" font-weight="700" fill="#fff">
+    <rect x="390" y="540" width="100" height="34" rx="6" fill="#1c8a3c"/><text x="440" y="563" text-anchor="middle">ВЫХОД</text>
+    <rect x="852" y="188" width="40" height="34" rx="6" fill="#1c8a3c"/><text x="872" y="211" text-anchor="middle" font-size="13">ВЫХ</text>
+  </g>
+  <!-- огнетушители -->
+  <g>
+    <circle cx="520" cy="470" r="16" fill="#d62f2f"/><text x="520" y="477" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">О</text>
+    <circle cx="790" cy="300" r="16" fill="#d62f2f"/><text x="790" y="307" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">О</text>
+    <circle cx="300" cy="100" r="16" fill="#d62f2f"/><text x="300" y="107" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">О</text>
+  </g>
+  <!-- аптечка -->
+  <rect x="90" y="450" width="34" height="34" rx="6" fill="#1c8a3c"/>
+  <path d="M107 456v22M96 467h22" stroke="#fff" stroke-width="5"/>
+  <!-- кнопка пожарной сигнализации -->
+  <rect x="560" y="90" width="28" height="28" rx="4" fill="#d62f2f"/><circle cx="574" cy="104" r="7" fill="#fff"/>
+  <!-- вы здесь -->
+  <circle cx="465" cy="230" r="14" fill="#e3b04b" stroke="#1b2420" stroke-width="3"/>
+  <text x="465" y="200" text-anchor="middle" font-size="18" font-weight="700" fill="#1b2420">Вы здесь</text>
+  <!-- легенда -->
+  <g font-size="16" fill="#1b2420">
+    <path d="M70 600 h40" stroke="#1c8a3c" stroke-width="6" stroke-dasharray="2 10" stroke-linecap="round"/><text x="120" y="606">Путь эвакуации</text>
+    <circle cx="275" cy="600" r="11" fill="#d62f2f"/><text x="275" y="605" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">О</text><text x="294" y="606">Огнетушитель</text>
+    <rect x="420" y="589" width="22" height="22" rx="4" fill="#1c8a3c"/><path d="M431 593v14M424 600h14" stroke="#fff" stroke-width="3"/><text x="452" y="606">Аптечка</text>
+    <rect x="550" y="589" width="22" height="22" rx="3" fill="#d62f2f"/><circle cx="561" cy="600" r="5" fill="#fff"/><text x="582" y="606">Пожарная сигнализация</text>
+  </g>
+</svg>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QR-коды · Охрана труда</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/app.css">
+  <style>
+    .qr-page { max-width: 1000px; margin: 0 auto; padding: 20px 16px 60px; }
+    .panel { padding: 18px; display: grid; gap: 14px; margin-bottom: 20px; }
+    .panel h1 { font-size: 24px; font-weight: 800; }
+    .pick { display: grid; gap: 6px; max-height: 320px; overflow: auto; }
+    .pick label { display: flex; gap: 10px; align-items: center; padding: 8px 10px; border-radius: 10px; background: var(--surface-2); font-weight: 600; font-size: 14.5px; }
+    .pick input { width: 20px; height: 20px; accent-color: var(--green-700); }
+    .pick .grp { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-top: 8px; }
+    .base { width: 100%; font: inherit; padding: 12px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); }
+    .sheet-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .qcard {
+      background: #fff; color: #18221c; border-radius: 18px; overflow: hidden;
+      border: 2px solid #1f5130; display: flex; flex-direction: column; break-inside: avoid;
+    }
+    .qcard-head { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: #1f5130; color: #fff; }
+    .qcard-head img { width: 38px; height: 38px; border-radius: 50%; background: #fff; padding: 2px; }
+    .qcard-head div { font-size: 11.5px; font-weight: 700; line-height: 1.25; }
+    .qcard-body { padding: 14px 18px 16px; text-align: center; display: grid; gap: 10px; flex: 1; }
+    .qcard-kind { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #b9861f; }
+    .qcard-kind.red { color: #c92a2a; }
+    .qcard-title { font-size: 19px; font-weight: 800; line-height: 1.2; }
+    .qcard svg { width: 72%; margin: 0 auto; display: block; }
+    .qcard-cta { font-size: 13px; font-weight: 700; color: #3a463f; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .qcard-cta .i { width: 18px; height: 18px; color: #1f5130; }
+    .qcard-url { font-size: 9.5px; color: #66716a; word-break: break-all; }
+    @media print {
+      @page { size: A4; margin: 10mm; }
+      body { background: #fff !important; }
+      .panel, .no-print { display: none !important; }
+      .qr-page { padding: 0; max-width: none; }
+      .sheet-grid { grid-template-columns: 1fr 1fr; gap: 8mm; }
+      .qcard { height: 128mm; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <div class="qr-page">
+    <div class="card panel">
+      <h1>QR-коды для печати</h1>
+      <p style="color:var(--muted)">Отметьте нужные карточки и нажмите «Печать». Общий QR повесьте на входе, остальные — на рабочих местах: человек сразу попадёт на нужную инструкцию.</p>
+      <label class="f" style="display:grid;gap:6px"><b>Адрес сайта</b><input class="base" id="base"></label>
+      <div id="localWarn" class="notice" hidden></div>
+      <div class="pick" id="pick"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn" style="width:auto" onclick="window.print()">Печать / сохранить PDF</button>
+        <button class="btn secondary" style="width:auto" id="all">Выбрать все</button>
+        <button class="btn secondary" style="width:auto" id="none">Снять все</button>
+      </div>
+    </div>
+    <div class="sheet-grid" id="cards"></div>
+  </div>
+  <script src="assets/icons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+  <script>
+  (function () {
+    var C, items = [];
+    var baseEl = document.getElementById('base');
+    baseEl.value = location.href.replace(/qr\.html.*$/, '');
+    if (/localhost|127\.0\.0\.1|^file:/.test(location.href)) {
+      var w = document.getElementById('localWarn');
+      w.hidden = false;
+      w.innerHTML = window.icon('alert') + '<span>Страница открыта локально. Перед печатью укажите адрес опубликованного сайта, например https://имя.github.io/chistopolye/</span>';
+    }
+    function esc(s) { return String(s || '').replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function qrSvg(text) {
+      var q = qrcode(0, 'M'); q.addData(text); q.make();
+      return q.createSvgTag({ cellSize: 4, margin: 2, scalable: true });
+    }
+    function draw() {
+      var base = baseEl.value.trim();
+      if (base && !/\/$/.test(base)) base += '/';
+      var checked = Array.prototype.filter.call(document.querySelectorAll('#pick input'), function (c) { return c.checked; }).map(function (c) { return +c.value; });
+      document.getElementById('cards').innerHTML = checked.map(function (i) {
+        var it = items[i], url = base + it.hash;
+        return '<div class="qcard"><div class="qcard-head"><img src="' + esc(C.org.logo) + '" alt=""><div>' + esc(C.org.name) + '</div></div>' +
+          '<div class="qcard-body"><div class="qcard-kind' + (it.red ? ' red' : '') + '">' + esc(it.kind) + '</div><div class="qcard-title">' + esc(it.title) + '</div>' + qrSvg(url) +
+          '<div class="qcard-cta">' + window.icon('phone') + 'Наведите камеру телефона</div><div class="qcard-url">' + esc(url) + '</div></div></div>';
+      }).join('');
+    }
+    fetch('data/content.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (c) {
+      C = c;
+      items.push({ grp: 'Главное', kind: 'Охрана труда', title: c.org.subtitle || 'Охрана труда в вашем телефоне', hash: '', on: true });
+      items.push({ grp: 'Главное', kind: 'Экстренно', title: 'Действия при ЧС', hash: '#/sos', red: true, on: true });
+      (c.categories || []).forEach(function (x) { items.push({ grp: 'Разделы', kind: 'Инструкции', title: x.title, hash: '#/cat/' + x.id }); });
+      (c.instructions || []).forEach(function (x) { items.push({ grp: 'Инструкции', kind: 'Инструкция по охране труда', title: x.title, hash: '#/i/' + x.id }); });
+      (c.emergencies || []).forEach(function (x) { items.push({ grp: 'Действия при ЧС', kind: 'При ЧС', title: x.title, hash: '#/sos/' + x.id, red: true }); });
+      (c.schemes || []).forEach(function (x) { items.push({ grp: 'Схемы', kind: 'Схема эвакуации', title: x.title, hash: '#/scheme/' + x.id }); });
+      var g = '', html = '';
+      items.forEach(function (it, i) {
+        if (it.grp !== g) { g = it.grp; html += '<div class="grp">' + esc(g) + '</div>'; }
+        html += '<label><input type="checkbox" value="' + i + '"' + (it.on ? ' checked' : '') + '>' + esc(it.title) + '</label>';
+      });
+      document.getElementById('pick').innerHTML = html;
+      draw();
+    });
+    document.getElementById('pick').addEventListener('change', draw);
+    baseEl.addEventListener('input', draw);
+    document.getElementById('all').onclick = function () { document.querySelectorAll('#pick input').forEach(function (c) { c.checked = true; }); draw(); };
+    document.getElementById('none').onclick = function () { document.querySelectorAll('#pick input').forEach(function (c) { c.checked = false; }); draw(); };
+  })();
+  </script>
+</body>
+</html>

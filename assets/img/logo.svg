@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Временная эмблема: заменить на настоящую через админку -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2d6a3e"/>
+      <stop offset="1" stop-color="#173f25"/>
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="58" fill="url(#g)"/>
+  <circle cx="60" cy="60" r="51" fill="none" stroke="#e3b04b" stroke-width="2.5"/>
+  <g fill="#f2c868">
+    <path d="M60 22c-4 5-4 11 0 16 4-5 4-11 0-16z"/>
+    <path d="M58 44c-8 0-13-5-13-12 8 0 13 5 13 12z"/>
+    <path d="M62 44c8 0 13-5 13-12-8 0-13 5-13 12z"/>
+    <path d="M58 58c-8 0-13-5-13-12 8 0 13 5 13 12z"/>
+    <path d="M62 58c8 0 13-5 13-12-8 0-13 5-13 12z"/>
+    <path d="M58 72c-8 0-13-5-13-12 8 0 13 5 13 12z"/>
+    <path d="M62 72c8 0 13-5 13-12-8 0-13 5-13 12z"/>
+  </g>
+  <path d="M60 38v58" stroke="#f2c868" stroke-width="3" stroke-linecap="round"/>
+  <path d="M30 86c10-6 20-8 30-8s20 2 30 8" fill="none" stroke="#e3b04b" stroke-width="3" stroke-linecap="round"/>
+  <path d="M36 95c8-4 16-5 24-5s16 1 24 5" fill="none" stroke="#e3b04b" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+</svg>

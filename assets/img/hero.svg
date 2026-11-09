@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9cc3d9"/>
+      <stop offset=".55" stop-color="#f3dfa6"/>
+      <stop offset="1" stop-color="#f7d58a"/>
+    </linearGradient>
+    <linearGradient id="field" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6b94f"/>
+      <stop offset="1" stop-color="#c98f2a"/>
+    </linearGradient>
+    <linearGradient id="near" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d9a33a"/>
+      <stop offset="1" stop-color="#9a6a1c"/>
+    </linearGradient>
+    <radialGradient id="sun" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#fff6d8"/>
+      <stop offset=".6" stop-color="#ffe7a0" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#ffe7a0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="520" fill="url(#sky)"/>
+  <circle cx="610" cy="205" r="120" fill="url(#sun)"/>
+  <circle cx="610" cy="205" r="40" fill="#fff4cf"/>
+  <!-- облака -->
+  <g fill="#fff" opacity=".7">
+    <ellipse cx="170" cy="90" rx="70" ry="16"/><ellipse cx="215" cy="80" rx="40" ry="14"/>
+    <ellipse cx="470" cy="60" rx="55" ry="11"/>
+  </g>
+  <!-- дальние холмы и лесополоса -->
+  <path d="M0 268 C120 240 230 250 340 258 S560 236 800 252 V300 H0z" fill="#7fa36a"/>
+  <path d="M0 278 C150 262 300 270 430 274 S650 262 800 270 V310 H0z" fill="#5f8a4f"/>
+  <g fill="#3f6b39">
+    <circle cx="40" cy="272" r="10"/><circle cx="58" cy="268" r="12"/><circle cx="78" cy="272" r="9"/>
+    <circle cx="700" cy="262" r="9"/><circle cx="716" cy="258" r="12"/><circle cx="735" cy="263" r="10"/><circle cx="752" cy="260" r="8"/>
+  </g>
+  <!-- элеватор и ферма на горизонте -->
+  <g fill="#4c5a4d">
+    <rect x="455" y="196" width="22" height="80" rx="3"/>
+    <rect x="480" y="186" width="22" height="90" rx="3"/>
+    <rect x="505" y="196" width="22" height="80" rx="3"/>
+    <rect x="474" y="172" width="34" height="16" rx="2"/>
+    <rect x="530" y="232" width="56" height="44"/>
+    <path d="M526 234 558 214 590 234z"/>
+  </g>
+  <!-- поля с бороздами -->
+  <path d="M0 300 C200 284 420 292 800 286 V520 H0z" fill="url(#field)"/>
+  <g fill="none" stroke="#b97f22" stroke-width="2" opacity=".55">
+    <path d="M400 296 C300 340 160 420 -40 520"/>
+    <path d="M400 296 C340 350 260 430 140 520"/>
+    <path d="M400 296 C380 360 350 440 320 520"/>
+    <path d="M400 296 C420 360 450 440 500 520"/>
+    <path d="M400 296 C460 350 560 430 680 520"/>
+    <path d="M400 296 C500 340 660 420 860 520"/>
+  </g>
+  <!-- трактор вдали -->
+  <g transform="translate(250 312)" fill="#1f5130">
+    <rect x="0" y="6" width="26" height="10" rx="2"/>
+    <rect x="14" y="-6" width="12" height="13" rx="2"/>
+    <circle cx="20" cy="18" r="7"/><circle cx="3" cy="19" r="4"/>
+    <rect x="6" y="-2" width="2" height="9"/>
+  </g>
+  <!-- колосья на переднем плане -->
+  <path d="M0 430 C200 410 520 420 800 404 V520 H0z" fill="url(#near)"/>
+  <g stroke="#7a5214" stroke-width="2" fill="none" stroke-linecap="round">
+    <path d="M60 520 C62 480 70 450 84 420"/><path d="M110 520 C108 470 100 440 92 410"/>
+    <path d="M690 520 C694 476 704 446 720 418"/><path d="M740 520 C736 474 730 444 718 412"/>
+    <path d="M770 520 C772 486 778 458 790 432"/>
+  </g>
+  <g fill="#e9bd56">
+    <ellipse cx="86" cy="414" rx="6" ry="16" transform="rotate(28 86 414)"/>
+    <ellipse cx="91" cy="402" rx="5" ry="14" transform="rotate(-12 91 402)"/>
+    <ellipse cx="722" cy="412" rx="6" ry="16" transform="rotate(30 722 412)"/>
+    <ellipse cx="717" cy="404" rx="5" ry="14" transform="rotate(-16 717 404)"/>
+    <ellipse cx="791" cy="426" rx="5" ry="14" transform="rotate(26 791 426)"/>
+  </g>
+</svg>
