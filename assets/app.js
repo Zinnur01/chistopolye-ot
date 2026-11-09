@@ -16,6 +16,20 @@
     });
   }
   function nl(s) { return esc(s).replace(/\n/g, '<br>'); }
+  // Мягкие переносы в длинных русских словах: «Электробезо-пасность» вместо «Электробезопа/сность».
+  // Перенос ставится после гласной перед слогом «согласная+гласная» (или перед гласной), минимум 3 буквы с каждой стороны.
+  var VOW = 'аеёиоуыэюяАЕЁИОУЫЭЮЯ';
+  function hyWord(w) {
+    var out = '', last = 0;
+    for (var i = 3; i <= w.length - 3; i++) {
+      var a = w[i - 1], b = w[i], c = w[i + 1];
+      var after = VOW.indexOf(a) >= 0 && (VOW.indexOf(b) >= 0 || (VOW.indexOf(b) < 0 && 'ьъй'.indexOf(b) < 0 && VOW.indexOf(c) >= 0));
+      var soft = 'ьъйЬЪЙ'.indexOf(a) >= 0;
+      if ((after || soft) && i - last >= 2) { out += w.slice(last, i) + '­'; last = i; }
+    }
+    return out + w.slice(last);
+  }
+  function hy(s) { return esc(s).replace(/[А-Яа-яЁё]{10,}/g, hyWord); }
   function asset(p) { return p || ''; }
   function tel(p) { return 'tel:' + String(p || '').replace(/[^\d+]/g, ''); }
   function store(k, v) {
@@ -119,13 +133,13 @@
     if (x.quiz && x.quiz.length) tags.push('<span class="tag wheat">' + I('award') + 'Тест</span>');
     if (passed(x.id)) tags.push('<span class="tag ok">' + I('check') + 'Ознакомлен</span>');
     return '<a class="row" href="#/i/' + esc(x.id) + '"><div class="row-icon">' + I(c ? c.icon : 'book') + '</div>' +
-      '<div class="row-body"><div class="row-title">' + esc(x.title) + '</div>' +
+      '<div class="row-body"><div class="row-title">' + hy(x.title) + '</div>' +
       (x.summary ? '<div class="row-sub">' + esc(x.summary) + '</div>' : '') +
       (tags.length ? '<div class="row-tags">' + tags.join('') + '</div>' : '') + '</div>' + I('chevron') + '</a>';
   }
   function emgCard(e) {
     return '<a class="emg" href="#/sos/' + esc(e.id) + '"><div class="row-icon red">' + I(e.icon || 'alert') + '</div>' +
-      '<div class="emg-title">' + esc(e.title) + '</div>' + (e.summary ? '<div class="emg-sub">' + esc(e.summary) + '</div>' : '') + '</a>';
+      '<div class="emg-title">' + hy(e.title) + '</div>' + (e.summary ? '<div class="emg-sub">' + esc(e.summary) + '</div>' : '') + '</a>';
   }
   function empty(text, ic) { return '<div class="empty">' + I(ic || 'info') + '<p>' + esc(text) + '</p></div>'; }
   function mainNumber() { return (C.numbers && C.numbers[0]) || { phone: '112', label: 'Единый номер экстренных служб' }; }
@@ -139,7 +153,7 @@
     var cats = C.categories.map(function (c) {
       var cnt = C.instructions.filter(function (x) { return x.category === c.id; }).length;
       return '<a class="tile" href="#/cat/' + esc(c.id) + '"><div class="tile-icon">' + I(c.icon) + '</div>' +
-        '<div class="tile-title">' + esc(c.title) + '</div><div class="tile-meta">' + plural(cnt, 'инструкция', 'инструкции', 'инструкций') + '</div></a>';
+        '<div class="tile-title">' + hy(c.title) + '</div><div class="tile-meta">' + plural(cnt, 'инструкция', 'инструкции', 'инструкций') + '</div></a>';
     }).join('');
     var contacts = (C.contacts || []).slice(0, 3).map(contactRow).join('');
     var schemes = (C.schemes || []).slice(0, 2).map(function (s) {
@@ -227,7 +241,7 @@
     }
     parts.push('<a class="row" href="#/sos"><div class="row-icon red">' + I('alert') + '</div><div class="row-body"><div class="row-title">Если случилась авария</div><div class="row-sub">Действия при ЧС и экстренные номера</div></div>' + I('chevron') + '</a>');
 
-    return '<div class="ins-head"><span class="eyebrow">Инструкция по охране труда</span><h1>' + esc(x.title) + '</h1>' + (x.summary ? '<p>' + esc(x.summary) + '</p>' : '') + '</div>' +
+    return '<div class="ins-head"><span class="eyebrow">Инструкция по охране труда</span><h1>' + hy(x.title) + '</h1>' + (x.summary ? '<p>' + esc(x.summary) + '</p>' : '') + '</div>' +
       '<div class="page">' + parts.join('') + '</div>';
   };
 

@@ -1,5 +1,5 @@
 // Service worker: сайт открывается даже без интернета (показывается последняя сохранённая версия).
-var SHELL = 'ot-shell-v1';
+var SHELL = 'ot-shell-v2';
 var FILES = [
   './', 'index.html', 'assets/app.css', 'assets/app.js', 'assets/icons.js',
   'assets/img/logo.svg', 'assets/img/hero.svg', 'manifest.webmanifest'
