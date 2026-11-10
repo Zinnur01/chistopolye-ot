@@ -37,5 +37,24 @@
   </div>
   <script src="assets/icons.js?v=9"></script>
   <script src="assets/app.js?v=9"></script>
+  <!-- Яндекс Метрика: статистику видит только владелец счётчика на metrika.yandex.ru.
+       Впишите номер счётчика в METRIKA_ID. Пока там 0, счётчик не работает. -->
+  <script>
+    (function () {
+      var METRIKA_ID = 114172447;
+      var host = location.hostname;
+      if (!METRIKA_ID || host === 'localhost' || host === '127.0.0.1') return;
+      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+      (window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=' + METRIKA_ID, 'ym');
+      ym(METRIKA_ID, 'init', {
+        clickmap: true, trackLinks: true, accurateTrackBounce: true,
+        webvisor: true,   // записи посещений: как человек листал и куда нажимал
+        trackHash: true   // переходы по #/... считаются отдельными страницами
+      });
+    })();
+  </script>
 </body>
 </html>
